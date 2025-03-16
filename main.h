@@ -5,8 +5,25 @@
 #ifndef _Included_roj_NativeLibrary
 #define _Included_roj_NativeLibrary
 
+// 判断是否为 MinGW 编译器
+#ifdef __MINGW32__
+#define USING_MINGW32 1
+#define USING_MINGW 1
+#elif defined(__MINGW64__)
+#define USING_MINGW64 1
+    #define USING_MINGW 1
+#else
+    #define USING_MINGW 0
+#endif
+
+#ifdef _MSC_VER
+#define FJNIEXPORT __declspec(dllexport)
+#define FJNICALL __cdecl
+#endif
+#ifdef USING_MINGW
 #define FJNIEXPORT __declspec(__dllexport__)
 #define FJNICALL __cdecl
+#endif
 
 inline int min(int l, int r) {return l < r ? l : r;}
 
