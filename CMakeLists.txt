@@ -6,7 +6,7 @@ include_directories("$ENV{JAVA_HOME}\\include\\win32")
 include_directories("${CMAKE_CURRENT_BINARY_DIR}/libdivsufsort/include")
 
 if(MSVC)
-    add_compile_options("/O2" "/maes" "/msse4" "/pipe")
+    add_compile_options("/O2" "/arch:SSE4.1" "/D__SSE4_1__" "/D__AES__")
     add_library(cpp SHARED main.cpp)
     target_link_libraries(cpp PRIVATE divsufsort PRIVATE winpthread PRIVATE ws2_32 PRIVATE bcrypt)
 else()
